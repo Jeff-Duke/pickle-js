@@ -33,4 +33,21 @@ A pattern often used in place of an object with a single method, is to take adva
 
 TODO: Function returning a function example
 
+It's important to note that each time you store the returned function for later use, it forms it's own closure.  The original variable is not shared between each function, each function has it's own copy of that original environment.
 
+TODO: Show 2 functions from 1 returned function example
+
+### Drawbacks
+
+Because each version of a closure keeps a copy of that original environment, that environment isn't removed from the callstack until all of the closures using it have been garbage collected.
+TODO: link to JS Callstack explanation.
+TODO: link to JS Garbage collection explanation.
+So, for example, if you had 100 different functions referencing that original variable, and 99 of them get garbage collected, that variable still exists until the 100th function gets collected.  This uses up local memory and eventually can lead to memory leaks.
+
+TODO: Add a link to an article explaining memory leaks.
+
+### Wrapping up or, how you might talk about closure in an interview
+
+Closures are a fundamental part of many programming languages, not just JavaScript.  Closure refers to a function maintaining access to the free variables defined where the function was called.  Some use cases for closures are event handlers, timeouts, intervals, callbacks and keeping variables private within functions.  One drawback to using closure is that they can lead to overconsumption of memory, and possibly memory leaks if not handled properly.
+
+Hopefully this has helped de-mystify closures for you a bit.  I would highly recommend the "You Don't Know Javascript: Scope & Closure" book if you'd like to learn more.
